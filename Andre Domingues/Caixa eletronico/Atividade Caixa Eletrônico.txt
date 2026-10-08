@@ -1,0 +1,101 @@
+﻿Atividade Caixa Eletrônico
+Alunos: André e Arthur Vinicius
+Turma: T04N
+
+
+------------------------------------------------------------------------------------
+
+
+import java.util.Scanner;
+
+
+public class CaixaEletronico {
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        
+        double saldo = 0.0;
+        double limiteSaqueDiario = 500.0; 
+        double totalSacadoHoje = 0.0;
+        int tentativasSenha = 0;
+        String senhaCorreta = "1234";
+        boolean acessoPermitido = false;
+
+
+        System.out.println("=== Caixa Eletrônico ===");
+        
+        while (tentativasSenha < 3) {
+            System.out.print("Digite sua senha de 4 dígitos: ");
+            String senhaDigitada = entrada.nextLine();
+            
+            if (senhaDigitada.equals(senhaCorreta)) {
+                acessoPermitido = true;
+                System.out.println("Acesso liberado!\n");
+                break;
+            } else {
+                tentativasSenha++;
+                System.out.println("Senha incorreta. Você tem " + (3 - tentativasSenha) + " tentativa(s) restante(s).\n");
+            }
+        }
+
+
+        if (!acessoPermitido) {
+            System.out.println("Conta bloqueada por excesso de tentativas. Encerrando programa.");
+        } else {
+            int opcao = 0;
+            
+            while (opcao != 4) {
+                System.out.println("----- MENU -----");
+                System.out.println("1. Consultar saldo");
+                System.out.println("2. Depositar dinheiro");
+                System.out.println("3. Sacar dinheiro");
+                System.out.println("4. Sair");
+                System.out.print("Escolha uma opção: ");
+                
+                opcao = entrada.nextInt();
+
+
+                if (opcao == 1) {
+                    System.out.printf("Seu saldo atual é: R$ %.2f\n\n", saldo);
+                } 
+                else if (opcao == 2) {
+                    System.out.print("Digite o valor do depósito: R$ ");
+                    double deposito = entrada.nextDouble();
+                    
+                    if (deposito <= 0) {
+                        System.out.println("Erro: Valor inválido para depósito.\n");
+                    } else {
+                        saldo = saldo + deposito;
+                        System.out.println("Depósito realizado com sucesso!\n");
+                    }
+                } 
+                else if (opcao == 3) {
+                    System.out.print("Digite o valor do saque: R$ ");
+                    double saque = entrada.nextDouble();
+                    
+                    if (saque <= 0) {
+                        System.out.println("Erro: Valor inválido para saque.\n");
+                    } 
+                    else if (saque > saldo) {
+                        System.out.println("Erro: Saldo insuficiente.\n");
+                    } 
+                    else if (saque + totalSacadoHoje > limiteSaqueDiario) {
+                        System.out.printf("Erro: Limite diário de saque é de R$ %.2f. Você já sacou R$ %.2f hoje.\n\n", limiteSaqueDiario, totalSacadoHoje);
+                    } 
+                    else {
+                        saldo = saldo - saque;
+                        totalSacadoHoje = totalSacadoHoje + saque;
+                        System.out.println("Saque realizado com sucesso, retire seu dinheiro.\n");
+                    }
+                } 
+                else if (opcao == 4) {
+                    System.out.println("Saindo da sua conta... Até logo!");
+                } 
+                else {
+                    System.out.println("Erro: Opção inválida! Tente novamente.\n");
+                }
+            }
+        }
+        
+        entrada.close();
+    }
+}
