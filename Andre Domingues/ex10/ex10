@@ -1,0 +1,46 @@
+class Pessoa {
+    String nome;
+    int idade;
+    String cidade;
+
+    void apresentar() {
+        System.out.println("Olá, meu nome é " + nome +
+                           " e tenho " + idade + " anos.");
+    }
+
+    void fazerAniversario() {
+        idade++;
+    }
+
+    void exibirDados() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Idade: " + idade);
+        System.out.println("Cidade: " + cidade);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Pessoa pessoa1 = new Pessoa();
+        Pessoa pessoa2 = new Pessoa();
+
+        pessoa1.nome = "Arthur";
+        pessoa1.idade = 18;
+        pessoa1.cidade = "Cascavel";
+
+        pessoa2.nome = "João";
+        pessoa2.idade = 20;
+        pessoa2.cidade = "Curitiba";
+
+        System.out.println("Dados da primeira pessoa:");
+        pessoa1.exibirDados();
+
+        System.out.println("\nDados da segunda pessoa:");
+        pessoa2.exibirDados();
+
+        System.out.println("\nAniversário da primeira pessoa:");
+        pessoa1.fazerAniversario();
+
+        pessoa1.exibirDados();
+    }
+}
