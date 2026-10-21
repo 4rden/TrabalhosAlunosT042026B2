@@ -1,0 +1,36 @@
+class ContaBancaria {
+    String titular;
+    double saldo;
+
+    void depositar(double valor) {
+        saldo += valor;
+        System.out.println("Depósito realizado.");
+    }
+
+    void sacar(double valor) {
+        if (valor <= saldo) {
+            saldo -= valor;
+            System.out.println("Saque realizado.");
+        } else {
+            System.out.println("Saldo insuficiente. Saque não realizado.");
+        }
+    }
+
+    void exibirSaldo() {
+        System.out.println("Titular: " + titular);
+        System.out.println("Saldo: R$ " + saldo);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ContaBancaria conta = new ContaBancaria();
+
+        conta.titular = "Arthur";
+        conta.saldo = 500.00;
+
+        conta.depositar(200.00);
+        conta.sacar(100.00);
+        conta.exibirSaldo();
+    }
+}
